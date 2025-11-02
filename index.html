@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multiplication Master - Math Game</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🎯 Multiplication Master</h1>
+            <p class="tagline">Practice your multiplication skills!</p>
+        </header>
+
+        <div class="game-area">
+            <!-- Level Selection Screen -->
+            <div id="level-screen" class="screen active">
+                <h2>Choose Your Level</h2>
+                <div class="level-buttons">
+                    <button class="level-btn" data-level="easy">
+                        <span class="level-title">Easy</span>
+                        <span class="level-desc">Tables 1-5</span>
+                    </button>
+                    <button class="level-btn" data-level="medium">
+                        <span class="level-title">Medium</span>
+                        <span class="level-desc">Tables 1-10</span>
+                    </button>
+                    <button class="level-btn" data-level="hard">
+                        <span class="level-title">Hard</span>
+                        <span class="level-desc">Tables 1-12</span>
+                    </button>
+                    <button class="level-btn" data-level="expert">
+                        <span class="level-title">Expert</span>
+                        <span class="level-desc">Tables 1-15</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Game Screen -->
+            <div id="game-screen" class="screen">
+                <div class="stats">
+                    <div class="stat-item">
+                        <span class="stat-label">Score:</span>
+                        <span id="score" class="stat-value">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Streak:</span>
+                        <span id="streak" class="stat-value">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-label">Time:</span>
+                        <span id="timer" class="stat-value">0s</span>
+                    </div>
+                </div>
+
+                <div class="question-container">
+                    <div class="question" id="question">
+                        <span id="num1">5</span>
+                        <span class="operator">×</span>
+                        <span id="num2">7</span>
+                        <span class="equals">=</span>
+                        <span class="answer-placeholder">?</span>
+                    </div>
+                </div>
+
+                <div class="answer-area">
+                    <input 
+                        type="number" 
+                        id="answer-input" 
+                        placeholder="Type your answer" 
+                        autofocus
+                    >
+                    <button id="submit-btn" class="btn-primary">Submit</button>
+                </div>
+
+                <div id="feedback" class="feedback"></div>
+
+                <div class="game-controls">
+                    <button id="quit-btn" class="btn-secondary">Change Level</button>
+                </div>
+            </div>
+
+            <!-- Results Screen -->
+            <div id="results-screen" class="screen">
+                <h2>🎉 Great Job!</h2>
+                <div class="results">
+                    <div class="result-item">
+                        <span class="result-label">Final Score:</span>
+                        <span id="final-score" class="result-value">0</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Questions Answered:</span>
+                        <span id="total-questions" class="result-value">0</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Correct Answers:</span>
+                        <span id="correct-answers" class="result-value">0</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Accuracy:</span>
+                        <span id="accuracy" class="result-value">0%</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">Time Played:</span>
+                        <span id="time-played" class="result-value">0s</span>
+                    </div>
+                </div>
+                <div class="results-buttons">
+                    <button id="play-again-btn" class="btn-primary">Play Again</button>
+                    <button id="change-level-btn" class="btn-secondary">Change Level</button>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>Keep practicing and become a multiplication champion! 🏆</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
