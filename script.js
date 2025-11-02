@@ -36,9 +36,13 @@ levelButtons.forEach(btn => {
     });
 });
 
-submitBtn.addEventListener('click', checkAnswer);
+submitBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    checkAnswer();
+});
 answerInput.addEventListener('keypress', (e) => {
     if (e.key === 'Enter') {
+        e.preventDefault();
         checkAnswer();
     }
 });
@@ -107,10 +111,6 @@ function generateQuestion() {
     
     document.getElementById('num1').textContent = num1;
     document.getElementById('num2').textContent = num2;
-    // Only clear value if not already cleared (to avoid issues with focus)
-    if (answerInput.value !== '') {
-        answerInput.value = '';
-    }
     clearFeedback();
 }
 
@@ -119,11 +119,13 @@ function checkAnswer() {
     
     if (isNaN(userAnswer)) {
         showFeedback('Please enter a number!', 'incorrect');
-        answerInput.focus();
         return;
     }
     
     totalQuestions++;
+    
+    // Clear the input immediately
+    answerInput.value = '';
     
     if (userAnswer === currentQuestion.answer) {
         correctAnswers++;
@@ -131,25 +133,21 @@ function checkAnswer() {
         score += 10 + (streak * 2); // Bonus points for streak
         showFeedback(`🎉 Correct! +${10 + (streak * 2)} points`, 'correct');
         
-        // Keep focus on input to maintain keyboard
-        answerInput.value = '';
-        answerInput.focus();
-        
         // Generate new question after a short delay
         setTimeout(() => {
             generateQuestion();
+            // Re-focus after generating question
+            setTimeout(() => answerInput.focus(), 10);
         }, 1000);
     } else {
         streak = 0;
         showFeedback(`❌ Wrong! The answer is ${currentQuestion.answer}`, 'incorrect');
         
-        // Keep focus on input to maintain keyboard
-        answerInput.value = '';
-        answerInput.focus();
-        
         // Generate new question after showing the correct answer
         setTimeout(() => {
             generateQuestion();
+            // Re-focus after generating question
+            setTimeout(() => answerInput.focus(), 10);
         }, 2000);
     }
     
