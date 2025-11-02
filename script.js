@@ -107,7 +107,10 @@ function generateQuestion() {
     
     document.getElementById('num1').textContent = num1;
     document.getElementById('num2').textContent = num2;
-    answerInput.value = '';
+    // Only clear value if not already cleared (to avoid issues with focus)
+    if (answerInput.value !== '') {
+        answerInput.value = '';
+    }
     clearFeedback();
 }
 
@@ -116,6 +119,7 @@ function checkAnswer() {
     
     if (isNaN(userAnswer)) {
         showFeedback('Please enter a number!', 'incorrect');
+        answerInput.focus();
         return;
     }
     
@@ -127,19 +131,25 @@ function checkAnswer() {
         score += 10 + (streak * 2); // Bonus points for streak
         showFeedback(`🎉 Correct! +${10 + (streak * 2)} points`, 'correct');
         
+        // Keep focus on input to maintain keyboard
+        answerInput.value = '';
+        answerInput.focus();
+        
         // Generate new question after a short delay
         setTimeout(() => {
             generateQuestion();
-            answerInput.focus();
         }, 1000);
     } else {
         streak = 0;
         showFeedback(`❌ Wrong! The answer is ${currentQuestion.answer}`, 'incorrect');
         
+        // Keep focus on input to maintain keyboard
+        answerInput.value = '';
+        answerInput.focus();
+        
         // Generate new question after showing the correct answer
         setTimeout(() => {
             generateQuestion();
-            answerInput.focus();
         }, 2000);
     }
     
